@@ -8,10 +8,11 @@ import MainTabNavigator from "./MainTabNavigator";
 import PostScreen from "../screens/PostScreen";
 import registerForPushNotificationsAsync from "../api/registerForPushNotificationsAsync";
 import fb from "../Connections/Firebase"
+
 const RootStackNavigator = StackNavigator({
-  Registration: {
-    screen: Registration
-  },
+  // Registration: {
+  //   screen: Registration
+  // },
   Main: {
     screen: MainTabNavigator
   },

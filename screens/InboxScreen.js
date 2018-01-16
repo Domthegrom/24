@@ -8,15 +8,19 @@ import {
   CardItem,
   Button,
   Icon,
-  Body,
   Item,
   Input,
-  Toast
+  Toast,
+  Header,
+  Right,
+  Left,
+  Body,
+  Title,
 } from "native-base";
 
 export default class inbox extends React.Component {
   static navigationOptions = {
-    title: "inbox"
+    header: null,
   };
 
   constructor(props) {
@@ -28,56 +32,94 @@ export default class inbox extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+         <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Me")}
+            >
+              <Text style={styles.topNavigationButtons}>me</Text>
+            </Button>
+          </Left>
+          <Body style={styles.topCenterNavButton}>
+            <Title style={styles.titleText}>12:05</Title>
+            <Icon name="ios-arrow-down" style={styles.topNavigationButtons} />
+
+          </Body>
+          <Right>
+            <Button
+              transparent
+
+              onPress={() => this.props.navigation.navigate("PostScreen")}
+            >
+              <Text style={styles.topNavigationButtons}>new</Text>
+
+            </Button>
+          </Right>
+        </Header>
         <ScrollView>
-          <Container>
-            <Content>
-              <Card>
-                <CardItem
-                  onPress={() => this.props.navigation.navigate("PostScreen")}
-                >
-                  <Body>
-                    <Text style={{ fontWeight: "700" }}>
-                      This will be the title of the thought (Non Private)
-                    </Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  onPress={() => this.props.navigation.navigate("PostScreen")}
-                  style={{ alignContent: "center" }}
-                >
-                  <Text>
-                    Message goes here message goes here message goes here
-                  </Text>
-                </CardItem>
-                <CardItem style={styles.buttonContainer}>
-                  <Button transparent>
-                    <Text>favorite</Text>
-                  </Button>
-                  <View style={styles.buttonDivider} />
-                  <Button transparent>
-                    <Text>extend</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-              <Card>
-                <CardItem style={{ alignContent: "center" }}>
-                  <Text>
-                    Message goes here message goes here message goes here,
-                    Private
-                  </Text>
-                </CardItem>
-                <CardItem style={styles.buttonContainer}>
-                  <Button transparent>
-                    <Text>Favorite</Text>
-                  </Button>
-                  <View style={styles.buttonDivider} />
-                  <Button transparent>
-                    <Text>Extend</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-            </Content>
-          </Container>
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              justifyContent: "space-around"
+            }}
+          >
+            <Text style={{ textAlign: "center", color: "black", fontSize: 24 }}>
+              how to get honest feedback
+            </Text>
+            <View
+              style={{
+                paddingLeft: "5%",
+                justifyContent: "space-between",
+                paddingVertical: "4%",
+                borderBottomWidth: 1,
+                borderBottomColor: "#000000"
+              }}
+            >
+              <Text style={styles.instructionsText}>
+                {" "}
+                1 tap to <Text style={{ color: "blue" }}>copy inbox link</Text>
+              </Text>
+              <Text style={styles.instructionsText}>
+                {" "}
+                2 share your personal link
+              </Text>
+              <Text style={styles.instructionsText}>
+                {" "}
+                3 recieve feedback and chat 1 on 1
+              </Text>
+            </View>
+            <View
+              style={{
+                paddingLeft: "5%",
+                justifyContent: "space-between",
+                paddingVertical: "4%",
+                borderBottomWidth: 1,
+                borderBottomColor: "#000000"
+              }}
+            >
+              <Text style={styles.instructionsText}>
+                {" "}
+                read messges delete in{" "}
+                <Text style={{fontWeight: 'bold'}}>24:00</Text>
+              </Text>
+              <Text style={styles.instructionsText}>
+                {" "}
+                unread messages delete in{" "}
+                <Text style={{ fontWeight: 'bold' }}>72:00</Text>
+              </Text>
+            </View>
+            <View
+              style={{
+                paddingLeft: "5%",
+                justifyContent: "space-between",
+                paddingVertical: "4%",
+              }}
+            >
+            <Text style={{fontSize: 17}}> reset your personal link under the <Text style={{color: 'blue'}}>me </Text>tab</Text>
+            </View>
+          </View>
         </ScrollView>
         <View style={styles.tabBarInfoContainer}>
           <View style={{ flexDirection: "row" }}>
@@ -95,7 +137,7 @@ export default class inbox extends React.Component {
                 copy fanmail link
               </Text>
             </View>
-            <Text
+            {/* <Text
               onPress={() =>
                 Toast.show({
                   text: "New link generated!",
@@ -105,9 +147,9 @@ export default class inbox extends React.Component {
               }
               style={styles.tabBarInfoText}
             >
-              {/* Are you sure? */}
+              Are you sure?
               reset
-            </Text>
+            </Text> */}
           </View>
         </View>
       </View>
@@ -119,7 +161,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    paddingVertical: '3%'
+  },
+  instructionsText: {
+    fontSize: 17,
+    color: "#000000",
+    textAlign: "left",
+    paddingVertical: "2%"
   },
   buttonContainer: {
     borderColor: "#bfbfc3",
@@ -152,6 +201,18 @@ const styles = StyleSheet.create({
   tabBarInfoText: {
     paddingHorizontal: "12%",
     color: "#0371FF"
+  },
+  topNavigationButtons: {
+    fontSize: 15,
+    color: "#0371FF"
+  },
+  topCenterNavButton: {
+    flexDirection: "row"
+  },
+  titleText: {
+    justifyContent: "center",
+    paddingHorizontal: "25%",
+    fontSize: 13
   },
   buttonDivider: {
     borderLeftWidth: 1,
