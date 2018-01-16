@@ -3,7 +3,7 @@
 ## What needs to be done
 
 
-## Not an Updated ReadMEE!! Slow Process of updating should be finished with updating it relatively soon.
+## Not an Updated ReadMEE!! Slow Process of updating should be finished with updating it relatively soon. Everything will be transitioned to git issues.
 
 
 ## Let it be noted that the User Interface has been completed for all of this and is now time to create functionality for the components. 
