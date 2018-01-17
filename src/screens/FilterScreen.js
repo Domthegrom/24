@@ -1,21 +1,13 @@
-import React from 'react'
-import {
-  ScrollView,
-  StyleSheet,
-  Button,
-  View,
-  Text,
-  Slider,
-  Dimensions
-} from 'react-native'
-import LoginForm from '../components/loginForm'
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, Slider, Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 
-export default class Registration extends React.Component {
+export default class Registration extends Component {
   static navigationOptions = {
     title: 'filter'
   }
+
   render() {
     return (
       <View style={styles.container}>

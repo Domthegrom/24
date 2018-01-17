@@ -1,22 +1,20 @@
-// @flow
-
-import React from 'react'
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text
-} from 'react-native'
+import React, { Component } from 'react'
+import { Platform, StyleSheet, View, Text } from 'react-native'
 import { Button, Header, Left, Right, Body, Title, Icon } from 'native-base'
 import Card from '../components/card'
-import ImageCards from '../components/ImageCards'
 
 import { getThoughts } from '../Connections'
 
-export default class Feed extends React.Component {
+export default class Feed extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      thoughtIndex: 0,
+      thoughts: []
+    }
+  }
+
   componentDidMount() {
     // TODO: add loading screen before this gets loaded
 
@@ -46,14 +44,10 @@ export default class Feed extends React.Component {
     // TODO: dismiss loading screen
   }
 
-  state = {
-    thoughtIndex: 0,
-    thoughts: []
-  }
-
   static navigationOptions = {
     header: null
   }
+
   nextCard = () => {
     ;() =>
       this.setState({

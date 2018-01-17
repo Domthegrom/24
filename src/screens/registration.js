@@ -1,13 +1,20 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Button, View, Text } from 'react-native'
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 import LoginForm from '../components/loginForm'
-
 import { registerUser } from '../Connections/'
 
-export default class Registration extends React.Component {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: '50%'
+  }
+})
+
+export default class Registration extends Component {
   static navigationOptions = {
     header: null
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,10 +30,3 @@ export default class Registration extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: '50%'
-  }
-})

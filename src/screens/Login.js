@@ -1,6 +1,22 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Button, View, Text } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
+import { StyleSheet, Button, View, Text } from 'react-native'
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    paddingVertical: '50%'
+  },
+  logo: {
+    color: '#0371FF',
+    fontSize: 45,
+    textAlign: 'center'
+  },
+  logoContainer: {
+    alignContent: 'center',
+    justifyContent: 'center'
+  }
+})
 
 export default class Login extends React.Component {
   static navigationOptions = {
@@ -23,20 +39,3 @@ export default class Login extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    paddingVertical: '50%'
-  },
-  logo: {
-    color: '#0371FF',
-    fontSize: 45,
-    textAlign: 'center'
-  },
-  logoContainer: {
-    alignContent: 'center',
-    justifyContent: 'center'
-  }
-})

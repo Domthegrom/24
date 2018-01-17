@@ -1,15 +1,8 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, Platform, View } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
 import {
-  Container,
-  Content,
-  Card,
-  CardItem,
   Button,
   Icon,
-  Item,
-  Input,
   Toast,
   Header,
   Right,
@@ -29,6 +22,7 @@ export default class inbox extends React.Component {
       showToast: false
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -64,7 +58,6 @@ export default class inbox extends React.Component {
           <View
             style={{
               flexDirection: 'column',
-              justifyContent: 'center',
               justifyContent: 'space-around'
             }}
           >

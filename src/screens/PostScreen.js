@@ -1,8 +1,7 @@
-import React from 'react'
-import { ScrollView, StyleSheet, TextInput, View, Text } from 'react-native'
-import { postThought } from '../Connections/'
+import React, { Component } from 'react'
+import { TextInput } from 'react-native'
 
-export default class PostScreen extends React.Component {
+export default class PostScreen extends Component {
   /**
    * TODO: add a post button and use the following function:
    *
@@ -24,6 +23,7 @@ export default class PostScreen extends React.Component {
   }
 
   _PostAThought = async () => {}
+
   render() {
     return (
       <TextInput
@@ -36,11 +36,3 @@ export default class PostScreen extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff'
-  }
-})

@@ -1,10 +1,4 @@
-import React from 'react'
-import { Platform } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
-
-import Colors from '../constants/Colors'
-
 import InboxScreen from '../screens/InboxScreen'
 import tshirt from '../screens/t-shirt'
 import Feed from '../screens/Feed'
