@@ -8,40 +8,41 @@ import {
   View,
   Text
 } from "react-native";
-import {
-  Button,
-  Header,
-  Left,
-  Right,
-  Body,
-  Title,
-  Icon
-} from "native-base";
+import { Button, Header, Left, Right, Body, Title, Icon } from "native-base";
 import Card from "../components/card";
 import ImageCards from "../components/ImageCards";
 
-import {getThoughts} from "../Connections";
+import { getThoughts } from "../Connections";
 
 export default class Feed extends React.Component {
-
   componentDidMount() {
-      //TODO: add loading screen before this gets loaded
+    //TODO: add loading screen before this gets loaded
 
-     getThoughts(this.props.screenProps.firebase, this.updateThoughts.bind(this), 3)
+    getThoughts(
+      this.props.screenProps.firebase,
+      this.updateThoughts.bind(this),
+      3
+    );
   }
 
-  updateThoughts = (data) => {
+  updateThoughts = data => {
     this.setState({
       thoughts: data,
       cards: data.map((thought, i) => {
-        console.log("** / **")
-        console.log(thought, i)
-        return (<Card key={thought.id} thought={thought} onSwiperOff={this.nextCard}/>)
+        console.log("** / **");
+        console.log(thought, i);
+        return (
+          <Card
+            key={thought.id}
+            thought={thought}
+            onSwiperOff={this.nextCard}
+          />
+        );
       })
-    })
+    });
 
     //TODO: dismiss loading screen
-  }
+  };
 
   state = {
     thoughtIndex: 0,
@@ -52,20 +53,22 @@ export default class Feed extends React.Component {
     header: null
   };
   nextCard = () => {
-    () => this.setState({
-      thoughtIndex: thoughtIndex + 1
-    });
+    () =>
+      this.setState({
+        thoughtIndex: thoughtIndex + 1
+      });
   };
 
   render() {
-    const {thoughtIndex} = this.state;
+    const { thoughtIndex } = this.state;
     return (
-      <View style={{
-        flex: 1
-      }}>
+      <View
+        style={{
+          flex: 1
+        }}
+      >
         <Header>
           <Left>
-
             <Button
               transparent
               onPress={() => this.props.navigation.navigate("Me")}
@@ -74,18 +77,20 @@ export default class Feed extends React.Component {
             </Button>
           </Left>
           <Body style={styles.topCenterNavButton}>
+            {/* place time here */}
             <Title style={styles.titleText}>12:05</Title>
-            <Icon name="ios-arrow-down" style={styles.topNavigationButtons} />
-
+            <Icon
+              onPress={() => this.props.navigation.navigate("FilterScreen")}
+              name="ios-arrow-down"
+              style={styles.topNavigationButtons}
+            />
           </Body>
           <Right>
             <Button
               transparent
-
               onPress={() => this.props.navigation.navigate("PostScreen")}
             >
               <Text style={styles.topNavigationButtons}>new</Text>
-
             </Button>
           </Right>
         </Header>
@@ -110,9 +115,9 @@ export default class Feed extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
-  
+
   tabBarInfoContainer: {
     position: "absolute",
     bottom: 0,
@@ -144,11 +149,13 @@ const styles = StyleSheet.create({
     color: "#0371FF"
   },
   topCenterNavButton: {
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "space-around"
   },
   titleText: {
     justifyContent: "center",
-    paddingHorizontal: "25%",
     fontSize: 13
   }
 });

@@ -15,12 +15,12 @@ import {
   Right,
   Left,
   Body,
-  Title,
+  Title
 } from "native-base";
 
 export default class inbox extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
 
   constructor(props) {
@@ -32,7 +32,7 @@ export default class inbox extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-         <Header>
+        <Header>
           <Left>
             <Button
               transparent
@@ -42,22 +42,25 @@ export default class inbox extends React.Component {
             </Button>
           </Left>
           <Body style={styles.topCenterNavButton}>
-            <Title style={styles.titleText}>12:05</Title>
+            <Title style={styles.titleText}>sort</Title>
             <Icon name="ios-arrow-down" style={styles.topNavigationButtons} />
-
           </Body>
           <Right>
             <Button
               transparent
-
-              onPress={() => this.props.navigation.navigate("PostScreen")}
+              onPress={() =>
+                Toast.show({
+                  text: "Bulk Delete",
+                  position: "top",
+                  buttonText: "Okay"
+                })
+              }
             >
-              <Text style={styles.topNavigationButtons}>new</Text>
-
+              <Text style={styles.topNavigationButtons}>select</Text>
             </Button>
           </Right>
         </Header>
-        <ScrollView>
+        <ScrollView style={{ paddingVertical: "3%" }}>
           <View
             style={{
               flexDirection: "column",
@@ -74,7 +77,7 @@ export default class inbox extends React.Component {
                 justifyContent: "space-between",
                 paddingVertical: "4%",
                 borderBottomWidth: 1,
-                borderBottomColor: "#000000"
+                borderBottomColor: "#efeff4"
               }}
             >
               <Text style={styles.instructionsText}>
@@ -96,28 +99,32 @@ export default class inbox extends React.Component {
                 justifyContent: "space-between",
                 paddingVertical: "4%",
                 borderBottomWidth: 1,
-                borderBottomColor: "#000000"
+                borderBottomColor: "#efeff4"
               }}
             >
               <Text style={styles.instructionsText}>
                 {" "}
                 read messges delete in{" "}
-                <Text style={{fontWeight: 'bold'}}>24:00</Text>
+                <Text style={{ fontWeight: "bold" }}>24:00</Text>
               </Text>
               <Text style={styles.instructionsText}>
                 {" "}
                 unread messages delete in{" "}
-                <Text style={{ fontWeight: 'bold' }}>72:00</Text>
+                <Text style={{ fontWeight: "bold" }}>72:00</Text>
               </Text>
             </View>
             <View
               style={{
                 paddingLeft: "5%",
                 justifyContent: "space-between",
-                paddingVertical: "4%",
+                paddingVertical: "4%"
               }}
             >
-            <Text style={{fontSize: 17}}> reset your personal link under the <Text style={{color: 'blue'}}>me </Text>tab</Text>
+              <Text style={{ fontSize: 17 }}>
+                {" "}
+                reset your personal link under the{" "}
+                <Text style={{ color: "blue" }}>me </Text>tab
+              </Text>
             </View>
           </View>
         </ScrollView>
@@ -160,9 +167,7 @@ export default class inbox extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: "#fff",
-    paddingVertical: '3%'
+    backgroundColor: "#fff"
   },
   instructionsText: {
     fontSize: 17,
@@ -171,7 +176,7 @@ const styles = StyleSheet.create({
     paddingVertical: "2%"
   },
   buttonContainer: {
-    borderColor: "#bfbfc3",
+    borderColor: "#efeff4",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     alignContent: "center",
@@ -217,6 +222,6 @@ const styles = StyleSheet.create({
   buttonDivider: {
     borderLeftWidth: 1,
     height: "100%",
-    borderColor: "#bfbfc3"
+    borderColor: "#efeff4"
   }
 });

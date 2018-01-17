@@ -6,6 +6,7 @@ import Registration from "../screens/registration";
 import Me from "../screens/Me";
 import MainTabNavigator from "./MainTabNavigator";
 import PostScreen from "../screens/PostScreen";
+import FilterScreen from "../screens/FilterScreen";
 import registerForPushNotificationsAsync from "../api/registerForPushNotificationsAsync";
 import fb from "../Connections/Firebase"
 
@@ -21,6 +22,9 @@ const RootStackNavigator = StackNavigator({
   },
   PostScreen: {
     screen: PostScreen
+  },
+  FilterScreen: {
+    screen: FilterScreen,
   },
   Me: {
     screen: Me
