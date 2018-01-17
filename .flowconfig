@@ -25,6 +25,10 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+; Custom
+.*/node_modules/protobufjs/src/
+.*/node_modules/react-native/Libraries/
+
 [include]
 
 [libs]
