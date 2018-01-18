@@ -1,28 +1,14 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "TwentyFour",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "flow": "flow",
-    "lint": "eslint -c .eslintrc src",
-    "test": "node ./node_modules/jest/bin/jest.js --watch"
-  },
-  "jest": {
-    "preset": "jest-expo"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
   },
   "dependencies": {
-    "@expo/samples": "2.1.1",
-    "@ptomasroos/react-native-multi-slider": "0.0.11",
-    "expo": "^24.0.0",
-    "firebase": "^4.8.1",
-    "native-base": "^2.3.5",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
-    "react-native-gifted-chat": "^0.3.0",
-    "react-native-multislider": "0.0.14",
-    "react-navigation": "^1.0.0-beta.21"
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "@expo/vector-icons": "^6.2.2",
+    "babel-eslint": "^8.1.2",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -30,10 +16,24 @@
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.5.0",
+    "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.5.1",
+    "firebase": "^4.8.2",
     "flow-bin": "^0.63.1",
-    "jest-expo": "^24.0.0",
-    "prettier": "^1.10.2"
+    "native-base": "^2.3.7",
+    "prettier": "^1.9.2",
+    "react": "16.2.0",
+    "react-native": "0.52.0",
+    "react-native-gifted-chat": "^0.3.0",
+    "react-navigation": "^1.0.0-beta.27"
+  },
+  "devDependencies": {
+    "babel-jest": "22.1.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.1.3",
+    "react-test-renderer": "16.2.0"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
