@@ -1,0 +1,164 @@
+import React, { Component } from 'react'
+import { Platform, StyleSheet, View, Text } from 'react-native'
+import { Button, Header, Left, Right, Body, Title, Icon } from 'native-base'
+import Card from '../components/card'
+
+import { getThoughts } from '../Connections'
+
+export default class Feed extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      thoughtIndex: 0,
+      thoughts: []
+    }
+  }
+
+  componentDidMount() {
+    // TODO: add loading screen before this gets loaded
+
+    getThoughts(
+      this.props.screenProps.firebase,
+      this.updateThoughts.bind(this),
+      3
+    )
+  }
+
+  updateThoughts = data => {
+    this.setState({
+      thoughts: data,
+      cards: data.map((thought, i) => {
+        console.log('** / **')
+        console.log(thought, i)
+        return (
+          <Card
+            key={thought.id}
+            thought={thought}
+            onSwiperOff={this.nextCard}
+          />
+        )
+      })
+    })
+
+    // TODO: dismiss loading screen
+  }
+
+  static navigationOptions = {
+    header: null
+  }
+
+  nextCard = () => {
+    ;() =>
+      this.setState({
+        thoughtIndex: thoughtIndex + 1
+      })
+  }
+
+  render() {
+    const { thoughtIndex } = this.state
+    return (
+      <View
+        style={{
+          flex: 1
+        }}
+      >
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate('Me')}
+            >
+              <Text style={styles.topNavigationButtons}>me</Text>
+            </Button>
+          </Left>
+          <Body style={styles.topCenterNavButton}>
+            {/* place time here */}
+            <Title style={styles.titleText}>12:05</Title>
+            <Icon
+              onPress={() => this.props.navigation.navigate('FilterScreen')}
+              name="ios-arrow-down"
+              style={styles.topNavigationButtons}
+            />
+          </Body>
+          <Right>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate('PostScreen')}
+            >
+              <Text style={styles.topNavigationButtons}>new</Text>
+            </Button>
+          </Right>
+        </Header>
+        {this.state.cards}
+        {/* <ImageCards img={imageCard[0]} /> */}
+        <View style={styles.tabBarInfoContainer}>
+          <View style={styles.topCenterNavButton}>
+            <Text
+              onPress={() => this.props.navigation.navigate('PostScreen')}
+              style={styles.tabBarInfoText}
+            >
+              reply
+            </Text>
+            <Text style={styles.tabBarInfoText}>share</Text>
+            <Text style={styles.tabBarInfoText}>next</Text>
+          </View>
+        </View>
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: {
+          height: -3
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3
+      },
+      android: {
+        elevation: 20
+      }
+    }),
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 10
+  },
+  tabBarInfoText: {
+    paddingHorizontal: '12%',
+    color: '#0371FF'
+  },
+  topNavigationButtons: {
+    fontSize: 15,
+    color: '#0371FF'
+  },
+  topCenterNavButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  titleText: {
+    justifyContent: 'center',
+    fontSize: 13
+  }
+})
+
+const imageCard = [
+  {
+    id: '259389830744794',
+    img: 'https://www.petmd.com/sites/default/files/petmd-cat-happy-13.jpg'
+  }
+]
