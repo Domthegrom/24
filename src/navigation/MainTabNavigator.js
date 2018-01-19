@@ -2,11 +2,12 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 import InboxScreen from '../screens/InboxScreen'
 import tshirt from '../screens/t-shirt'
 import Feed from '../screens/Feed'
+import Chat from '../screens/Chat'
 
 export default TabNavigator(
   {
     tshirt: {
-      screen: tshirt
+      screen: Chat
     },
     feed: {
       screen: Feed

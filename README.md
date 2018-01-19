@@ -2,12 +2,13 @@
 
 ## Getting Started
 
-If you haven't yet start by installing [yarn](https://yarnpkg.com/en/) and then also install the [Expo CLI](https://docs.expo.io/versions/latest/guides/exp-cli.html)
+If you haven't yet start by installing [yarn](https://yarnpkg.com/en/).
 
 1. Clone this repo using `git clone https://github.com/Domthegrom/24.git`
 2. Move to the appropriate directory: `cd 24`.
-3. Run `yarn install` in order to install dependencies.
-4. Run `exp start` for development mode.
+4. Run `yarn install` in order to install dependencies.
+5. Run `react-native start` to start the react native packager.
+6. Run `react-native run-ios` to start the ios emulator and launch th app.
 
 ## Deployment
 
