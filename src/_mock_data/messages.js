@@ -15,7 +15,7 @@ export default [
     status: 'send_going',
     msgType: 'text',
     text: 'Hell yeah! #winning',
-    isOutgoing: true,
+    isOutgoing: false,
     fromUser: users['1'],
     timeString: '10:01'
   },
@@ -33,7 +33,7 @@ export default [
     status: 'send_succeed',
     msgType: 'text',
     text: 'Coffee?',
-    isOutgoing: true,
+    isOutgoing: false,
     fromUser: users['1'],
     timeString: '10:00'
   },
@@ -51,7 +51,7 @@ export default [
     status: 'send_succeed',
     msgType: 'text',
     text: 'I once saved a baby penguin 🐧 from drowning',
-    isOutgoing: true,
+    isOutgoing: false,
     fromUser: users['1'],
     timeString: '10:00'
   }

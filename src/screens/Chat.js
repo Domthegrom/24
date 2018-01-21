@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import { View, NativeModules, Platform, StyleSheet } from 'react-native'
+import {
+  NativeModules,
+  Platform,
+  StyleSheet,
+  KeyboardAvoidingView
+} from 'react-native'
 import IMUI from 'aurora-imui-react-native'
 import demoMessages from '../_mock_data/messages'
+import ChatInput from '../components/ChatInput'
 
-const { MessageList, ChatInput, AuroraIMUIController } = IMUI
+const { MessageList, AuroraIMUIController } = IMUI
 
 export default class Chat extends Component {
   constructor(props) {
@@ -19,7 +25,6 @@ export default class Chat extends Component {
     this.state = {
       inputLayoutHeight: initHeight,
       messageListLayout: { flex: 1, width: window.width, margin: 0 },
-      inputViewLayout: { width: window.width, height: initHeight },
       isAllowPullToRefresh: true
     }
   }
@@ -41,7 +46,6 @@ export default class Chat extends Component {
     if (this.state.inputLayoutHeight != size.height) {
       this.setState({
         inputLayoutHeight: size.height,
-        inputViewLayout: { width: size.width, height: size.height },
         messageListLayout: { flex: 1, width: window.width, margin: 0 }
       })
     }
@@ -54,41 +58,62 @@ export default class Chat extends Component {
 
   resetMenu = () => {
     if (Platform.OS === 'android') {
-      this.refs.ChatInput.showMenu(false)
       this.setState({
         messageListLayout: { flex: 1, width: window.width, margin: 0 }
-      })
-    } else {
-      this.setState({
-        inputViewLayout: { width: window.width, height: 100 }
       })
     }
   }
 
+  sendMessage = text => {
+    const message = {
+      msgId:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      status: 'send_going',
+      msgType: 'text',
+      text,
+      isOutgoing: true,
+      fromUser: {
+        userId: '321',
+        displayName: 'Ben'
+      },
+      timeString: '10:05'
+    }
+
+    AuroraIMUIController.appendMessages([message])
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="position"
+        contentContainerStyle={styles.container}
+        keyboardVerticalOffset={64}
+        style={styles.container}
+      >
         <MessageList
-          ref="MessageList"
+          sendBubble={{
+            imageName: 'outgoing_bubble',
+            padding: { left: 14, top: 14, right: 14, bottom: 24 }
+          }}
+          receiveBubble={{
+            imageName: 'incoming_bubble',
+            padding: { left: 24, top: 15, right: 15, bottom: 14 }
+          }}
           style={this.state.messageListLayout}
-          // onAvatarClick={this.onAvatarClick}
-          // onMsgClick={this.onMsgClick}
-          // onStatusViewClick={this.onStatusViewClick}
-          // onTouchMsgList={this.onTouchMsgList}
-          // onTapMessageCell={this.onTapMessageCell}
-          // onBeginDragMessageList={this.onBeginDragMessageList}
           // onPullToRefresh={this.onPullToRefresh}
+          receiveBubblePadding={{ left: 14, top: 12, right: 25, bottom: 12 }}
+          sendBubblePadding={{ left: 25, top: 12, right: 14, bottom: 12 }}
           sendBubbleTextSize={18}
           sendBubbleTextColor="#000000"
-          sendBubblePadding={{ left: 10, top: 10, right: 15, bottom: 10 }}
           messageListBackgroundColor="#FFFFFF"
         />
-        <ChatInput
-          ref="ChatInput"
-          style={this.state.inputViewLayout}
-          onSizeChange={this.onInputViewSizeChange}
-        />
-      </View>
+        <ChatInput send={this.sendMessage} />
+      </KeyboardAvoidingView>
     )
   }
 }
