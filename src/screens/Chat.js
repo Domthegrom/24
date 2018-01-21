@@ -1,51 +1,103 @@
-import React from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import React, { Component } from 'react'
+import { View, NativeModules, Platform, StyleSheet } from 'react-native'
+import IMUI from 'aurora-imui-react-native'
 import demoMessages from '../_mock_data/messages'
 
-console.ignoredYellowBox = [
-  'Warning: Failed prop type: Invalid prop `keyboardShouldPersistTaps`'
-]
+const { MessageList, ChatInput, AuroraIMUIController } = IMUI
 
-const Chat = () => (
-  <GiftedChat messages={demoMessages} user={{ _id: '123test' }} />
-)
+export default class Chat extends Component {
+  constructor(props) {
+    super(props)
 
-export default Chat
+    let initHeight
+    if (Platform.OS === 'ios') {
+      initHeight = 100
+    } else {
+      initHeight = 100
+    }
 
-// import React from 'react'
-// import { View, NativeModules } from 'react-native'
-// import IMUI from 'aurora-imui-react-native'
-// import demoMessages from '../../_mock_data/messages'
+    this.state = {
+      inputLayoutHeight: initHeight,
+      messageListLayout: { flex: 1, width: window.width, margin: 0 },
+      inputViewLayout: { width: window.width, height: initHeight },
+      isAllowPullToRefresh: true
+    }
+  }
 
-// const messages = [
-//   {
-//     msgId: '1',
-//     status: 'send_going',
-//     msgType: 'text',
-//     text: 'Hello world',
-//     isOutgoing: true,
-//     fromUser: {
-//       userId: '1',
-//       displayName: 'Ken',
-//       avatarPath: 'ironman'
-//     },
-//     timeString: '10:00'
-//   }
-// ]
+  componentDidMount() {
+    this.resetMenu()
+    AuroraIMUIController.addMessageListDidLoadListener(() => {
+      this.getHistoryMessage()
+    })
+  }
 
-// console.ignoredYellowBox = [
-//   'Warning: Failed prop type: Invalid prop `keyboardShouldPersistTaps`'
-// ]
+  componentWillUnmount() {
+    AuroraIMUIController.removeMessageListDidLoadListener(
+      'IMUIMessageListDidLoad'
+    )
+  }
 
-// const { MessageList, ChatInput, AuroraIMUIController } = IMUI
+  onInputViewSizeChange = size => {
+    if (this.state.inputLayoutHeight != size.height) {
+      this.setState({
+        inputLayoutHeight: size.height,
+        inputViewLayout: { width: size.width, height: size.height },
+        messageListLayout: { flex: 1, width: window.width, margin: 0 }
+      })
+    }
+  }
 
-// // AuroraIMUIController.appendMessages(messages)d
+  getHistoryMessage = () => {
+    AuroraIMUIController.scrollToBottom(true)
+    AuroraIMUIController.insertMessagesToTop(demoMessages)
+  }
 
-// const Chat = () => (
-//   <View>
-//     <MessageList />
-//     <ChatInput />
-//   </View>
-// )
+  resetMenu = () => {
+    if (Platform.OS === 'android') {
+      this.refs.ChatInput.showMenu(false)
+      this.setState({
+        messageListLayout: { flex: 1, width: window.width, margin: 0 }
+      })
+    } else {
+      this.setState({
+        inputViewLayout: { width: window.width, height: 100 }
+      })
+    }
+  }
 
-// export default Chat
+  render() {
+    return (
+      <View style={styles.container}>
+        <MessageList
+          ref="MessageList"
+          style={this.state.messageListLayout}
+          // onAvatarClick={this.onAvatarClick}
+          // onMsgClick={this.onMsgClick}
+          // onStatusViewClick={this.onStatusViewClick}
+          // onTouchMsgList={this.onTouchMsgList}
+          // onTapMessageCell={this.onTapMessageCell}
+          // onBeginDragMessageList={this.onBeginDragMessageList}
+          // onPullToRefresh={this.onPullToRefresh}
+          sendBubbleTextSize={18}
+          sendBubbleTextColor="#000000"
+          sendBubblePadding={{ left: 10, top: 10, right: 15, bottom: 10 }}
+          messageListBackgroundColor="#FFFFFF"
+        />
+        <ChatInput
+          ref="ChatInput"
+          style={this.state.inputViewLayout}
+          onSizeChange={this.onInputViewSizeChange}
+        />
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  sendCustomBtn: {},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF'
+  }
+})

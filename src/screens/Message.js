@@ -1,13 +1,17 @@
 import React from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import { View, NativeModules } from 'react-native'
+import IMUI from 'aurora-imui-react-native'
 import demoMessages from '../_mock_data/messages'
 
-console.ignoredYellowBox = [
-  'Warning: Failed prop type: Invalid prop `keyboardShouldPersistTaps`'
-]
+const { MessageList, ChatInput, AuroraIMUIController } = IMUI
+
+AuroraIMUIController.appendMessages(demoMessages)
 
 const Message = () => (
-  <GiftedChat messages={demoMessages} user={{ _id: '123test' }} />
+  <View>
+    <MessageList />
+    <ChatInput />
+  </View>
 )
 
 export default Message

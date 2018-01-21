@@ -1,47 +1,58 @@
+const users = {
+  1: {
+    userId: '123',
+    displayName: 'Ken'
+  },
+  2: {
+    userId: '321',
+    displayName: 'Ben'
+  }
+}
+
 export default [
   {
+    msgId: '1',
+    status: 'send_going',
+    msgType: 'text',
     text: 'Hell yeah! #winning',
-    createdAt: 1489091435797,
-    _id: '10046a73-59c9-4a2a-93fe-aohgpwerg034',
-    user: {
-      _id: '123test',
-      avatar: 'https://graph.facebook.com/09615623515/picture?height=80'
-    }
+    isOutgoing: true,
+    fromUser: users['1'],
+    timeString: '10:01'
   },
   {
+    msgId: '2',
+    status: 'send_succeed',
+    msgType: 'text',
     text: 'Sure Penguin Man!',
-    createdAt: 1489091437797,
-    _id: '6f36d879-43de-4853-bcf4-4810dcad1e9a',
-    user: {
-      _id: '-KcEv8h7GrwAvAf4VTnW',
-      avatar: 'https://graph.facebook.com/259389830744794/picture?height=80'
-    }
+    isOutgoing: true,
+    fromUser: users['2'],
+    timeString: '10:01'
   },
   {
+    msgId: '3',
+    status: 'send_succeed',
+    msgType: 'text',
     text: 'Coffee?',
-    createdAt: 1489091435797,
-    _id: '10046a73-59c9-4a2a-93fe-edaf8da815d2',
-    user: {
-      _id: '123test',
-      avatar: 'https://graph.facebook.com/09615623515/picture?height=80'
-    }
+    isOutgoing: true,
+    fromUser: users['1'],
+    timeString: '10:00'
   },
   {
+    msgId: '4',
+    status: 'send_succeed',
+    msgType: 'text',
     text: 'My hero ❤️️',
-    createdAt: 1489091433016,
-    _id: '0d053339-227c-44d2-a030-4c12e4087d2d',
-    user: {
-      _id: '-KcEv8h7GrwAvAf4VTnW',
-      avatar: 'https://graph.facebook.com/259389830744794/picture?height=80'
-    }
+    isOutgoing: true,
+    fromUser: users['2'],
+    timeString: '10:00'
   },
   {
+    msgId: '5',
+    status: 'send_succeed',
+    msgType: 'text',
     text: 'I once saved a baby penguin 🐧 from drowning',
-    createdAt: 1489091430713,
-    _id: '33dafbde-5be7-4268-ae55-f474e42368b5',
-    user: {
-      _id: '123test',
-      avatar: 'https://graph.facebook.com/09615623515/picture?height=80'
-    }
+    isOutgoing: true,
+    fromUser: users['1'],
+    timeString: '10:00'
   }
 ]
