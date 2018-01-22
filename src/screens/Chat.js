@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   NativeModules,
+  Dimensions,
   Platform,
   StyleSheet,
   KeyboardAvoidingView
@@ -10,6 +11,7 @@ import demoMessages from '../_mock_data/messages'
 import ChatInput from '../components/ChatInput'
 
 const { MessageList, AuroraIMUIController } = IMUI
+const window = Dimensions.get('window')
 
 export default class Chat extends Component {
   constructor(props) {
@@ -43,7 +45,7 @@ export default class Chat extends Component {
   }
 
   onInputViewSizeChange = size => {
-    if (this.state.inputLayoutHeight != size.height) {
+    if (this.state.inputLayoutHeight !== size.height) {
       this.setState({
         inputLayoutHeight: size.height,
         messageListLayout: { flex: 1, width: window.width, margin: 0 }
@@ -98,19 +100,19 @@ export default class Chat extends Component {
         <MessageList
           sendBubble={{
             imageName: 'outgoing_bubble',
-            padding: { left: 14, top: 14, right: 14, bottom: 24 }
+            padding: { left: 13, top: 40, right: 15, bottom: 40 }
           }}
           receiveBubble={{
             imageName: 'incoming_bubble',
-            padding: { left: 24, top: 15, right: 15, bottom: 14 }
+            padding: { left: 13, top: 40, right: 15, bottom: 40 }
           }}
           style={this.state.messageListLayout}
-          // onPullToRefresh={this.onPullToRefresh}
-          receiveBubblePadding={{ left: 14, top: 12, right: 25, bottom: 12 }}
-          sendBubblePadding={{ left: 25, top: 12, right: 14, bottom: 12 }}
-          sendBubbleTextSize={18}
+          receiveBubblePadding={{ left: 25, top: 12, right: 14, bottom: 12 }}
+          sendBubblePadding={{ left: 14, top: 12, right: 25, bottom: 12 }}
+          sendBubbleTextSize={16}
           sendBubbleTextColor="#000000"
           messageListBackgroundColor="#FFFFFF"
+          avatarSize={{ width: 0, height: 0 }}
         />
         <ChatInput send={this.sendMessage} />
       </KeyboardAvoidingView>
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
   sendCustomBtn: {},
   container: {
     flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF'
   }

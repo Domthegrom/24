@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
 const sendButton = send => (
   <Button
-    color="black"
+    color="#0371ff"
     name="send"
     onPress={send}
     style={styles.sendButton}
