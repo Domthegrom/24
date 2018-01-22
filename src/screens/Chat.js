@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   NativeModules,
   Dimensions,
-  Platform,
   StyleSheet,
   KeyboardAvoidingView
 } from 'react-native'
@@ -13,26 +12,25 @@ import ChatInput from '../components/ChatInput'
 const { MessageList, AuroraIMUIController } = IMUI
 const window = Dimensions.get('window')
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF'
+  }
+})
+
 export default class Chat extends Component {
   constructor(props) {
     super(props)
 
-    let initHeight
-    if (Platform.OS === 'ios') {
-      initHeight = 100
-    } else {
-      initHeight = 100
-    }
-
     this.state = {
-      inputLayoutHeight: initHeight,
-      messageListLayout: { flex: 1, width: window.width, margin: 0 },
-      isAllowPullToRefresh: true
+      messageListLayout: { flex: 1, width: window.width, margin: 0 }
     }
   }
 
   componentDidMount() {
-    this.resetMenu()
     AuroraIMUIController.addMessageListDidLoadListener(() => {
       this.getHistoryMessage()
     })
@@ -44,26 +42,9 @@ export default class Chat extends Component {
     )
   }
 
-  onInputViewSizeChange = size => {
-    if (this.state.inputLayoutHeight !== size.height) {
-      this.setState({
-        inputLayoutHeight: size.height,
-        messageListLayout: { flex: 1, width: window.width, margin: 0 }
-      })
-    }
-  }
-
   getHistoryMessage = () => {
     AuroraIMUIController.scrollToBottom(true)
     AuroraIMUIController.insertMessagesToTop(demoMessages)
-  }
-
-  resetMenu = () => {
-    if (Platform.OS === 'android') {
-      this.setState({
-        messageListLayout: { flex: 1, width: window.width, margin: 0 }
-      })
-    }
   }
 
   sendMessage = text => {
@@ -119,13 +100,3 @@ export default class Chat extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  sendCustomBtn: {},
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF'
-  }
-})
