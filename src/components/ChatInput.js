@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, TextInput, View, Button } from 'react-native'
+import { AutoGrowingTextInput } from 'react-native-autogrow-textinput'
 
 const styles = StyleSheet.create({
   container: {
@@ -9,19 +10,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   inputContainer: {
-    flex: 1
+    flex: 1,
+    alignItems: 'stretch'
   },
-  input: {
+  textInput: {
+    paddingTop: 14,
+    paddingBottom: 14,
+    paddingLeft: 10,
+    fontSize: 16,
     backgroundColor: 'white',
-    height: 50,
-    paddingHorizontal: 8
+    borderWidth: 0
   },
   sendButtonContainer: {
     paddingRight: 12,
     paddingVertical: 6
   },
   sendButton: {
-    height: 50,
+    height: 45,
     width: 32
   }
 })
@@ -42,6 +47,10 @@ class ChatInput extends Component {
     this.state = {}
   }
 
+  onChange = event => {
+    this.setState({ text: event.nativeEvent.text || '' })
+  }
+
   send = () => {
     this.props.send(this.state.text)
     this.textInput.clear()
@@ -52,13 +61,17 @@ class ChatInput extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput
-            ref={ref => {
-              this.textInput = ref
+          <AutoGrowingTextInput
+            value={this.state.text}
+            onChange={event => this.onChange(event)}
+            style={styles.textInput}
+            placeholder="write a message..."
+            placeholderTextColor="#66737C"
+            maxHeight={200}
+            minHeight={45}
+            ref={r => {
+              this.textInput = r
             }}
-            onChangeText={text => this.setState({ text })}
-            style={styles.input}
-            placeholder="Type your message here!"
           />
         </View>
         <View style={styles.sendButtonContainer}>{sendButton(this.send)}</View>
